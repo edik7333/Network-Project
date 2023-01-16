@@ -170,6 +170,7 @@ network 10.1.30.0 0.0.0.255 area 1
 network 10.1.40.0 0.0.0.255 area 1
 network 10.1.50.0 0.0.0.255 area 1
 network 10.1.60.0 0.0.0.255 area 1
+default-information originate
 exit
 ip nat inside source list 1 interface g0/0 overload
 
@@ -281,6 +282,7 @@ network 10.1.30.0 0.0.0.255 area 1
 network 10.1.40.0 0.0.0.255 area 1
 network 10.1.50.0 0.0.0.255 area 1
 network 10.1.60.0 0.0.0.255 area 1
+default-information originate
 exit
 ip nat inside source list 1 interface g0/0 overload
 
@@ -585,7 +587,7 @@ redistribute ospf 2
 exit
 router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
-redistribute eigrp 1
+redistribute eigrp 1 subnets
 exit
 
 RT02-C-TLV
@@ -608,7 +610,7 @@ redistribute ospf 2
 exit
 router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
-redistribute eigrp 1
+redistribute eigrp 1 subnets
 exit
 
 SW01-A-TLV
