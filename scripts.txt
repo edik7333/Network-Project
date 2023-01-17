@@ -1104,25 +1104,26 @@ exit
 router bgp 1
 bgp router-id 1.1.1.1
 neighbor 134.89.123.1 remote-as 2
+network 134.89.121.0 mask 255.255.255.0
+network 134.89.122.0 mask 255.255.255.0
 network 134.89.123.0 mask 255.255.255.0
+network 134.89.124.0 mask 255.255.255.0
 exit
 
 WAN-1
 -----
 enable
 conf t
-hostname ISP
+hostname WAN-1
 banner motd #Unauthorized access to this device is prohibited!#
 interface g0/0/0
-ip address 134.89.124.1 255.255.255.0
 no shutdown
 exit
 interface g0/1/0
-ip address 134.89.123.1 255.255.255.0
 no shutdown
 exit
 interface g0/2/0
-ip address 134.89.122.3 255.255.255.0
+ip address 134.89.131.2 255.255.255.0
 no shutdown
 exit
 interface g0/3/0
@@ -1132,5 +1133,203 @@ exit
 router bgp 2
 bgp router-id 2.2.2.2
 neighbor 134.89.123.2 remote-as 1
+neighbor 134.89.131.1 remote-as 3
 network 134.89.123.0 mask 255.255.255.0
+network 134.89.131.0 mask 255.255.255.0
+exit
+
+WAN-2
+-----
+enable
+conf t
+hostname WAN-2
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+no shutdown
+exit
+interface g0/1/0
+ip address 134.89.130.2 255.255.255.0
+no shutdown
+exit
+interface g0/2/0
+no shutdown
+exit
+interface g0/3/0
+ip address 134.89.131.1 255.255.255.0
+no shutdown
+exit
+router bgp 3
+bgp router-id 3.3.3.3
+neighbor 134.89.131.2 remote-as 2
+neighbor 134.89.130.1 remote-as 4
+network 134.89.131.0 mask 255.255.255.0
+network 134.89.130.0 mask 255.255.255.0
+exit
+
+WAN-3
+-----
+enable
+conf t
+hostname WAN-3
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+no shutdown
+exit
+interface g0/1/0
+ip address 134.89.130.1 255.255.255.0
+no shutdown
+exit
+interface g0/2/0
+ip address 134.89.129.2 255.255.255.0
+no shutdown
+exit
+interface g0/3/0
+no shutdown
+exit
+router bgp 4
+bgp router-id 4.4.4.4
+neighbor 134.89.130.2 remote-as 3
+neighbor 134.89.129.1 remote-as 5
+network 134.89.130.0 mask 255.255.255.0
+network 134.89.129.0 mask 255.255.255.0
+exit
+
+WAN-4
+-----
+enable
+conf t
+hostname WAN-4
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+ip address 134.89.129.1 255.255.255.0
+no shutdown
+exit
+interface g0/1/0
+no shutdown
+exit
+interface g0/2/0
+ip address 134.89.128.2 255.255.255.0
+no shutdown
+exit
+interface g0/3/0
+no shutdown
+exit
+router bgp 5
+bgp router-id 5.5.5.5
+neighbor 134.89.129.2 remote-as 4
+neighbor 134.89.128.1 remote-as 6
+network 134.89.129.0 mask 255.255.255.0
+network 134.89.128.0 mask 255.255.255.0
+exit
+
+WAN-5
+-----
+enable
+conf t
+hostname WAN-5
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+no shutdown
+exit
+interface g0/1/0
+ip address 134.89.127.2 255.255.255.0
+no shutdown
+exit
+interface g0/2/0
+ip address 134.89.128.1 255.255.255.0
+no shutdown
+exit
+interface g0/3/0
+no shutdown
+exit
+router bgp 6
+bgp router-id 6.6.6.6
+neighbor 134.89.128.2 remote-as 5
+neighbor 134.89.127.1 remote-as 7
+network 134.89.128.0 mask 255.255.255.0
+network 134.89.127.0 mask 255.255.255.0
+exit
+
+WAN-6
+-----
+enable
+conf t
+hostname WAN-6
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+ip address 134.89.127.1 255.255.255.0
+no shutdown
+exit
+interface g0/1/0
+no shutdown
+exit
+interface g0/2/0
+no shutdown
+exit
+interface g0/3/0
+ip address 134.89.126.2 255.255.255.0
+no shutdown
+exit
+router bgp 7
+bgp router-id 7.7.7.7
+neighbor 134.89.127.2 remote-as 6
+neighbor 134.89.126.1 remote-as 8
+network 134.89.127.0 mask 255.255.255.0
+network 134.89.126.0 mask 255.255.255.0
+exit
+
+WAN-7
+-----
+enable
+conf t
+hostname WAN-7
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+no shutdown
+exit
+interface g0/1/0
+ip address 134.89.126.1 255.255.255.0
+no shutdown
+exit
+interface g0/2/0
+no shutdown
+exit
+interface g0/3/0
+ip address 134.89.125.2 255.255.255.0
+no shutdown
+exit
+router bgp 8
+bgp router-id 8.8.8.8
+neighbor 134.89.126.2 remote-as 7
+neighbor 134.89.125.1 remote-as 9
+network 134.89.126.0 mask 255.255.255.0
+network 134.89.125.0 mask 255.255.255.0
+exit
+
+WAN-8
+-----
+enable
+conf t
+hostname WAN-8
+banner motd #Unauthorized access to this device is prohibited!#
+interface g0/0/0
+no shutdown
+exit
+interface g0/1/0
+no shutdown
+exit
+interface g0/2/0
+ip address 134.89.125.1 255.255.255.0
+no shutdown
+exit
+interface g0/3/0
+ip address 134.89.124.2 255.255.255.0
+no shutdown
+exit
+router bgp 9
+bgp router-id 9.9.9.9
+neighbor 134.89.125.2 remote-as 8
+neighbor 134.89.124.1 remote-as 1
+network 134.89.125.0 mask 255.255.255.0
+network 134.89.124.0 mask 255.255.255.0
 exit
