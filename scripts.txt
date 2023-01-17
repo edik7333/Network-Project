@@ -164,13 +164,14 @@ no shutdown
 exit
 ip route 0.0.0.0 0.0.0.0 134.89.122.3
 router ospf 2
+router-id 8.8.8.8
 network 10.0.0.0 0.0.0.255 area 0
-network 10.1.10.0 0.0.0.255 area 1
-network 10.1.20.0 0.0.0.255 area 1
-network 10.1.30.0 0.0.0.255 area 1
-network 10.1.40.0 0.0.0.255 area 1
-network 10.1.50.0 0.0.0.255 area 1
-network 10.1.60.0 0.0.0.255 area 1
+network 10.1.10.0 0.0.0.255 area 0
+network 10.1.20.0 0.0.0.255 area 0
+network 10.1.30.0 0.0.0.255 area 0
+network 10.1.40.0 0.0.0.255 area 0
+network 10.1.50.0 0.0.0.255 area 0
+network 10.1.60.0 0.0.0.255 area 0
 default-information originate
 exit
 ip nat inside source list 1 interface g0/0 overload
@@ -192,6 +193,7 @@ standby ip 10.1.10.254
 standby preempt
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 interface g0/0.20
 encapsulation dot1q 20
@@ -199,6 +201,7 @@ ip address 10.1.20.253 255.255.255.0
 standby ip 10.1.20.254
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 interface g0/0.30
 encapsulation dot1q 30
@@ -206,6 +209,7 @@ ip address 10.1.30.253 255.255.255.0
 standby ip 10.1.30.254
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 interface g0/0.40
 encapsulation dot1q 40
@@ -213,6 +217,7 @@ ip address 10.1.40.253 255.255.255.0
 standby ip 10.1.40.254
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 interface g0/0.50
 encapsulation dot1q 50
@@ -220,6 +225,7 @@ ip address 10.1.50.253 255.255.255.0
 standby ip 10.1.50.254
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 interface g0/0.60
 encapsulation dot1q 60
@@ -227,6 +233,7 @@ ip address 10.1.60.253 255.255.255.0
 standby ip 10.1.60.254
 standby priority 120
 ip nat inside
+ip ospf cost 100
 exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.129 10.1.10.251
@@ -271,19 +278,19 @@ no shutdown
 exit
 interface g0/0/0
 ip address 134.89.122.33 255.255.255.0
-ip ospf cost 100
 ip nat outside
 no shutdown
 exit
 ip route 0.0.0.0 0.0.0.0 134.89.122.4
 router ospf 2
+router-id 7.7.7.7
 network 10.0.0.0 0.0.0.255 area 0
-network 10.1.10.0 0.0.0.255 area 1
-network 10.1.20.0 0.0.0.255 area 1
-network 10.1.30.0 0.0.0.255 area 1
-network 10.1.40.0 0.0.0.255 area 1
-network 10.1.50.0 0.0.0.255 area 1
-network 10.1.60.0 0.0.0.255 area 1
+network 10.1.10.0 0.0.0.255 area 0
+network 10.1.20.0 0.0.0.255 area 0
+network 10.1.30.0 0.0.0.255 area 0
+network 10.1.40.0 0.0.0.255 area 0
+network 10.1.50.0 0.0.0.255 area 0
+network 10.1.60.0 0.0.0.255 area 0
 default-information originate
 exit
 ip nat inside source list 1 interface g0/0 overload
