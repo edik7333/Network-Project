@@ -394,11 +394,11 @@ authentication pre-share
 encryption aes 128
 group 5
 exit
-crypto isakmp key vpn address 10.20.20.2
+crypto isakmp key vpn address <target router IP>
 crypto ipsec transform-set VPN-P2 esp-aes esp-sha-hmac
 crypto map VPN-MAP 10 ipsec-isakmp
 description VPN connection to R3
-set peer 10.20.20.2
+set peer <target router IP>
 set transform-set VPN-P2
 match address 100
 exit
