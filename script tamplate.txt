@@ -1,0 +1,408 @@
+basic configuration
+--------------------
+enable
+conf t
+hostname <name>
+banner motd #Unauthorized access to this device is prohibited!#
+
+trunking
+--------
+enable
+conf t
+interface gig0/0
+switchport mode trunk
+exit
+
+vtp
+---
+enable
+conf t
+vtp domain <domain>
+vtp mode server/client/transparent
+
+vlan
+----
+enable
+conf t
+vlan <number>
+name <name>
+exit
+
+DHCP helper
+--------------
+enable
+conf t
+interface vlan <vlan id>
+ip helper-address <dhcp server ip> <subnet>
+
+STP
+---
+enable
+conf t
+spanning-tree mode rapid-pvst
+
+STP - root bridgh
+-----------------
+enable
+conf t
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10,20,30,40,50,60 root primary
+interface range g8/1,g7/1,g6/1,g9/1,g5/1
+switchport mode trunk
+spanning-tree guard root
+exit
+
+STP - access switch
+-------------------
+enable
+conf t
+spanning-tree mode rapid-pvst
+interface range fa0/1-24			#interfaces that are directly connected to end points
+spanning-tree portfast 
+spanning-tree bpduguard enable 
+exit
+
+dot1q
+-----
+enable
+conf t
+interface <interface>.<vlan>
+encapsulation dot1q <vlan>
+ip address 10.1.10.252 255.255.255.0
+exit
+
+HSRP - primary
+--------------
+enable
+conf t
+interface <interface>.<vlan>
+standby version 2
+standby ip 10.1.10.254
+standby preempt
+standby priority 160
+exit
+
+HSRP - secondary
+--------------
+enable
+conf t
+interface <interface>.<vlan>
+standby version 2
+standby ip 10.1.10.254
+standby priority 140
+exit
+
+interface vlan
+--------------
+enable
+conf t
+interface range <start interface>-<end interface>
+switchport mode access
+switchport access vlan <vlan>
+exit
+
+DHCP
+----
+enable
+conf t
+ip dhcp excluded-address 10.1.10.252 10.1.10.254
+ip dhcp pool dev
+network 10.1.10.0 255.255.255.0
+default-router 10.1.10.254
+exit
+
+Static IP Assignment
+-------------
+enable
+conf t
+interface <interface>.<vlan>
+ip address 10.1.10.252 255.255.255.0
+exit
+
+Dynamic IP Assignment
+-------------
+enable
+conf t
+interface <interface>.<vlan>
+ip address dhcp
+exit
+
+Authentication - enable
+-----------------------
+enable
+conf t
+service password-encryption
+enable secret <pass>
+
+Authentication - AAA local console
+----------------------------------
+enable
+conf t
+username <name> secret <pass>
+aaa new-model
+aaa authentication login default local
+line console 0
+login authentication default
+exit
+
+Authentication - AAA local vty
+------------------------------
+enable
+conf t
+ip domain-name <domain>
+crypto key generate rsa
+1024
+ip ssh version 2
+aaa new-model
+aaa authentication login <name> local
+line vty 0 4
+transport input ssh
+login authentication <name>
+exit
+
+Authentication - AAA tacacs+ console
+------------------------------------
+enable
+conf t
+username <name> secret <pass>			#a local user incase aaa server is down
+tacacs-server host <ip>
+tacacs-server key <key>
+aaa new-model
+aaa authentication login default group tacacs+ local
+line console 0
+login authentication default
+exit
+
+Authentication - AAA tacacs+ vty
+--------------------------------
+enable
+conf t
+ip domain-name <domain>
+crypto key generate rsa
+1024
+ip ssh version 2
+username <name> secret <pass>			#a local user incase aaa server is down
+tacacs-server host <ip>
+tacacs-server key <key>
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
+
+Authentication - AAA radius console
+-----------------------------------
+username <name> secret <pass>			#a local user incase aaa server is down
+radius-server host <ip>
+radius-server key <key>
+aaa new-model
+aaa authentication login default group radius local
+line console 0
+login authentication default
+exit
+
+Authentication - AAA radius vty
+-------------------------------
+enable
+conf t
+ip domain-name <domain>
+crypto key generate rsa
+1024
+ip ssh version 2
+username <name> secret <pass>			#a local user incase aaa server is down
+radius-server host <ip>
+radius-server key <key>
+aaa new-model
+aaa authentication login default group radius local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
+
+port security
+-------------
+enable
+conf t
+interface <interface>
+switchport mode access
+switchport port-security
+switchport port-security maximum <max addresses>
+switchport port-security mac-address <mac address>/sticky
+switchport port-security violation protect/restrict/shutdown
+exit
+
+standard acl
+------------
+enable
+conf t
+access-list <id> permit/deny <src addr> <wildcard>
+
+extended acl
+------------
+enable
+conf t
+access-list <id> permit/deny <protocol (tcp,udp)> <src addr> <src wildcard> <dst addr> <dst wildcard> <operator(eq,neq,gt,lt,range)> <port>
+
+named acl
+---------
+enable
+conf t
+ip access-list standart/extanded <name>
+permit/deny <protocol (tcp,udp)> <src addr> <src wildcard> <dst addr> <dst wildcard> <operator(eq,neq,gt,lt,range)> <port>
+exit
+
+static nat
+----------
+enable
+conf t
+interface <interface>
+ip nat inside
+exit
+interface <interface>
+ip nat outside
+exit
+ip nat inside source static <inside local ip> <inside global ip> 
+
+dynamic nat
+----------
+enable
+conf t
+interface <interface>
+ip nat inside
+exit
+interface <interface>
+ip nat outside
+exit
+ip nat pool <pool name> <starting ip> <ending ip> netmask <subnet mask>
+ip nat inside source list <acl list> pool <pool name>
+
+pat
+---
+enable
+conf t
+interface <interface>
+ip nat inside
+exit
+interface <interface>
+ip nat outside
+exit
+ip nat inside source list <acl list> interface <interface> overload
+
+interVLAN routing - multilayer switch
+-------------------------------------
+enable
+conf t
+ip routing
+
+static route
+------------
+enable
+conf t
+ip route <dst netid> <subnet> <next hop ip> <AD>
+
+rip route
+---------
+enable
+conf t
+router rip
+version 2
+network <netid>
+exit
+
+eigrp route
+-----------
+enable
+conf t
+router eigrp <AS>
+network <netid> <wildcard>
+exit
+
+eigrp router id
+-----------------
+router eigrp 82
+eigrp router-id 1.1.1.1
+exit
+
+eigrp passive-interface
+---------------------------
+router eigrp 82
+passive-interface g2/0
+exit
+
+eigrp summerization
+------------------------
+router eigrp 82
+network 192.168.0.0
+summary-address 192.168.0.0 255.255.0.0 90
+exit
+
+eigrp static route
+--------------------
+interface loopback 1
+ip address 10.1.1.1 255.255.255.252
+exit
+ip route 0.0.0.0 0.0.0.0 loopback 1
+router eigrp 82
+network 10.1.1.0 0.0.0.3
+redistribute static 
+exit
+
+eigrp ipv6
+-----------
+interface g1/0
+ipv6 eigrp 100
+exit
+
+ospf route
+----------
+enable
+conf t
+router ospf <process ID>
+network <netid> <subnet> area <area ID>
+exit
+
+bgp route
+---------
+router bgp <AS>
+bgp router-id 1.1.1.1
+neighbor x.x.x.x remote-as <AS>
+network x.x.x.x mask y.y.y.y
+exit
+
+הזדהות נתבים
+---------
+enable
+conf t
+key chain <name of chain>
+key <key id>
+key-string <password>
+exit
+interface g0/0
+ip authentication key-chain eigrp <as> <name of chain>
+ip authentication mode eigrp <as> md5
+exit
+
+VPN
+---
+enable
+conf t
+license boot module c1900 technology-package securityk9
+access-list 100 permit ip 192.168.10.0 0.0.0.255 192.168.30.0
+0.0.0.255
+crypto isakmp policy 1
+authentication pre-share
+encryption aes 128
+group 5
+exit
+crypto isakmp key vpn address 10.20.20.2
+crypto ipsec transform-set VPN-P2 esp-aes esp-sha-hmac
+crypto map VPN-MAP 10 ipsec-isakmp
+description VPN connection to R3
+set peer 10.20.20.2
+set transform-set VPN-P2
+match address 100
+exit
+interface s0/0/0
+crypto map VPN-MAP
+exit
