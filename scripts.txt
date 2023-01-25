@@ -648,6 +648,7 @@ match address 100
 exit
 interface g0/0/0
 ip address 10.0.0.2 255.255.255.0
+crypto map VPN-MAP
 no shutdown
 exit
 interface g0/0
@@ -905,14 +906,35 @@ RT01-C-HFA
 --------------
 enable
 conf t
+license boot module c1900 technology-package securityk9
+exit
+copy running-config startup-config
+reload
+enable
+conf t
 hostname SW02-D-HFA
 banner motd #Unauthorized access to this device is prohibited!#
+access-list 100 permit ip 10.3.0.0 0.0.255.255 10.2.0.0 0.0.255.255
+crypto isakmp policy 1
+authentication pre-share
+encryption aes 128
+group 5
+exit
+crypto isakmp key vpn address 10.0.0.1
+crypto ipsec transform-set VPN-P2 esp-aes esp-sha-hmac
+crypto map VPN-MAP 10 ipsec-isakmp
+description VPN connection to RT01-C-HFA
+set peer 10.0.0.1
+set transform-set VPN-P2
+match address 100
+exit
 interface g0/0
 ip address 10.3.1.1 255.255.255.240
 no shutdown
 exit
 interface g0/1/0
 ip address 10.0.0.3 255.255.255.0
+crypto map VPN-MAP
 no shutdown
 exit
 router ospf 2
@@ -924,14 +946,35 @@ RT02-C-HFA
 --------------
 enable
 conf t
+license boot module c1900 technology-package securityk9
+exit
+copy running-config startup-config
+reload
+enable
+conf t
 hostname SW02-D-HFA
 banner motd #Unauthorized access to this device is prohibited!#
+access-list 100 permit ip 10.3.0.0 0.0.255.255 10.2.0.0 0.0.255.255
+crypto isakmp policy 1
+authentication pre-share
+encryption aes 128
+group 5
+exit
+crypto isakmp key vpn address 10.0.0.2
+crypto ipsec transform-set VPN-P2 esp-aes esp-sha-hmac
+crypto map VPN-MAP 10 ipsec-isakmp
+description VPN connection to RT01-C-HFA
+set peer 10.0.0.2
+set transform-set VPN-P2
+match address 100
+exit
 interface g0/1
 ip address 10.3.1.17 255.255.255.240
 no shutdown
 exit
 interface g0/1/0
 ip address 10.0.0.4 255.255.255.0
+crypto map VPN-MAP
 no shutdown
 exit
 router ospf 2
