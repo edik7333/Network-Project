@@ -153,12 +153,12 @@ default-router 10.1.60.254
 exit
 interface g0/1/0
 ip address 10.0.0.5 255.255.255.0
+ip ospf cost 1
 ip nat inside
 no shutdown
 exit
 interface g0/0/0
-ip address 134.89.122.32 255.255.255.0
-ip ospf cost 1
+ip address 134.89.121.32 255.255.255.0
 ip nat outside
 no shutdown
 exit
@@ -277,7 +277,7 @@ ip nat inside
 no shutdown
 exit
 interface g0/0/0
-ip address 134.89.122.33 255.255.255.0
+ip address 134.89.121.33 255.255.255.0
 ip nat outside
 no shutdown
 exit
