@@ -36,6 +36,14 @@ exit
 interface g5/1
 switchport mode trunk
 exit
+interface range g4/1,g3/1
+switchport mode trunk
+shutdown
+channel-group 1 mode desirable
+no shutdown
+interface port-channel 1
+switchport mode trunk
+exit
 
 
 SW02-D-HZL
@@ -49,6 +57,14 @@ switchport mode trunk
 spanning-tree guard root
 exit
 interface g5/1
+switchport mode trunk
+exit
+interface range g4/1,g3/1
+switchport mode trunk
+shutdown
+channel-group 1 mode desirable
+no shutdown
+interface port-channel 1
 switchport mode trunk
 exit
 vtp domain HZL

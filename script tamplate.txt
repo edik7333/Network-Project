@@ -35,6 +35,18 @@ conf t
 interface vlan <vlan id>
 ip helper-address <dhcp server ip> <subnet>
 
+Ether Channel
+-------------
+enable
+conf t
+int range f0/21-22
+shutdown
+channel-group <ID> mode desirable
+no shutdown
+interface port-channel <ID>
+switchport mode trunk
+exit
+
 STP
 ---
 enable
