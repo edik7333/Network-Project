@@ -79,7 +79,7 @@ enable
 conf t
 hostname RT01-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
-access-list 1 permit any any
+access-list 1 permit any
 interface g0/0
 no shutdown
 exit
@@ -190,7 +190,7 @@ network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
 default-information originate
 exit
-ip nat inside source list 1 interface g0/0 overload
+ip nat inside source list 1 interface g0/0/0 overload
 
 RT02-C-HZL
 ----------
@@ -198,7 +198,7 @@ enable
 conf t
 hostname RT02-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
-access-list 1 permit any any
+access-list 1 permit any
 interface g0/0
 no shutdown
 exit
@@ -309,7 +309,7 @@ network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
 default-information originate
 exit
-ip nat inside source list 1 interface g0/0 overload
+ip nat inside source list 1 interface g0/0/0 overload
 
 
 SW01-A-HZL
