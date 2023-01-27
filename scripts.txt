@@ -178,7 +178,7 @@ ip address 134.89.121.32 255.255.255.0
 ip nat outside
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 134.89.122.3
+ip route 0.0.0.0 0.0.0.0 134.89.121.3
 router ospf 2
 router-id 8.8.8.8
 network 10.0.0.0 0.0.0.255 area 0
@@ -293,7 +293,7 @@ ip nat inside
 no shutdown
 exit
 interface g0/0/0
-ip address 134.89.121.33 255.255.255.0
+ip address 134.89.122.33 255.255.255.0
 ip nat outside
 no shutdown
 exit
@@ -1194,11 +1194,11 @@ ip address 134.89.123.2 255.255.255.0
 no shutdown
 exit
 interface g0/2/0
-ip address 134.89.122.3 255.255.255.0
+ip address 134.89.122.4 255.255.255.0
 no shutdown
 exit
 interface g0/3/0
-ip address 134.89.121.4 255.255.255.0
+ip address 134.89.121.3 255.255.255.0
 no shutdown
 exit
 router bgp 1
