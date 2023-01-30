@@ -422,3 +422,14 @@ exit
 interface s0/0/0
 crypto map VPN-MAP
 exit
+
+GRE Tunnel
+----------
+enable
+conf t
+interface Tunnel1
+ip address 172.16.1.1 255.255.255.0
+ip mtu 1400
+ip tcp adjust-mss 1360
+tunnel source g0/0
+tunnel destination 2.2.2.2
