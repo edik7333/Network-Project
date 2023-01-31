@@ -628,6 +628,7 @@ ip address 10.2.1.1 255.255.255.240
 no shutdown
 exit
 interface Tunnel1
+tunnel mode gre ip
 ip address 172.16.1.1 255.255.255.0
 tunnel source g0/0/0
 tunnel destination 10.0.0.3
@@ -677,7 +678,8 @@ ip address 10.2.1.17 255.255.255.240
 no shutdown
 exit
 interface Tunnel1
-ip address 172.16.1.1 255.255.255.0
+tunnel mode gre ip
+ip address 172.16.2.1 255.255.255.0
 tunnel source g0/0/0
 tunnel destination 10.0.0.4
 exit
@@ -687,7 +689,7 @@ redistribute ospf 2
 exit
 router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
-redistribute eigrp 1 subnets
+redistribute eigrp 1 metric 30 subnets
 exit
 
 SW01-A-TLV
@@ -964,6 +966,7 @@ crypto map VPN-MAP
 no shutdown
 exit
 interface Tunnel1
+tunnel mode gre ip
 ip address 172.16.1.2 255.255.255.0
 tunnel source g0/1/0
 tunnel destination 10.0.0.1
@@ -1009,7 +1012,8 @@ crypto map VPN-MAP
 no shutdown
 exit
 interface Tunnel1
-ip address 172.16.1.2 255.255.255.0
+tunnel mode gre ip
+ip address 172.16.2.2 255.255.255.0
 tunnel source g0/1/0
 tunnel destination 10.0.0.2
 exit
