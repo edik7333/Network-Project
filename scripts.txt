@@ -232,6 +232,13 @@ network 10.1.40.0 0.0.0.255 area 0
 network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
 default-information originate
+passive-interface g0/0
+passive-interface g0/0.10
+passive-interface g0/0.20
+passive-interface g0/0.30
+passive-interface g0/0.40
+passive-interface g0/0.50
+passive-interface g0/0.60
 exit
 ip nat inside source list 1 interface g0/0/0 overload
 
@@ -394,6 +401,13 @@ network 10.1.40.0 0.0.0.255 area 0
 network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
 default-information originate
+passive-interface g0/0
+passive-interface g0/0.10
+passive-interface g0/0.20
+passive-interface g0/0.30
+passive-interface g0/0.40
+passive-interface g0/0.50
+passive-interface g0/0.60
 exit
 ip nat inside source list 1 interface g0/0/0 overload
 
@@ -587,6 +601,12 @@ network 10.2.60.0 0.0.0.255
 network 10.2.11.0 0.0.0.255
 network 10.2.1.0 0.0.0.15
 network 10.2.1.16 0.0.0.15
+passive-interface vlan 10
+passive-interface vlan 20
+passive-interface vlan 30
+passive-interface vlan 40
+passive-interface vlan 50
+passive-interface vlan 60
 exit
 
 SW02-D-TLV
@@ -676,6 +696,12 @@ network 10.2.60.0 0.0.0.255
 network 10.2.12.0 0.0.0.255
 network 10.2.1.0 0.0.0.15
 network 10.2.1.16 0.0.0.15
+passive-interface vlan 10
+passive-interface vlan 20
+passive-interface vlan 30
+passive-interface vlan 40
+passive-interface vlan 50
+passive-interface vlan 60
 exit
 
 RT01-C-TLV
