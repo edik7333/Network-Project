@@ -80,6 +80,43 @@ conf t
 hostname RT01-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
 access-list 1 permit any
+ip access-list extended 110
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.20.0 0.0.0.255 any
+permit ip 10.1.40.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 120
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.10.0 0.0.0.255 any
+permit ip 10.1.40.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 130
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 140
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.10.0 0.0.0.255 any
+permit ip 10.1.20.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 150
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 160
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
 interface g0/0
 no shutdown
 exit
@@ -90,6 +127,7 @@ standby ip 10.1.10.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 110 out
 exit
 interface g0/0.20
 encapsulation dot1q 20
@@ -98,6 +136,7 @@ standby ip 10.1.20.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 120 out
 exit
 interface g0/0.30
 encapsulation dot1q 30
@@ -106,6 +145,7 @@ standby ip 10.1.30.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 130 out
 exit
 interface g0/0.40
 encapsulation dot1q 40
@@ -114,6 +154,7 @@ standby ip 10.1.40.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 140 out
 exit
 interface g0/0.50
 encapsulation dot1q 50
@@ -122,6 +163,7 @@ standby ip 10.1.50.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 150 out
 exit
 interface g0/0.60
 encapsulation dot1q 60
@@ -130,6 +172,7 @@ standby ip 10.1.60.254
 standby preempt
 standby priority 140
 ip nat inside
+ip access-group 160 out
 exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.0 10.1.10.128
@@ -199,6 +242,43 @@ conf t
 hostname RT02-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
 access-list 1 permit any
+ip access-list extended 110
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.20.0 0.0.0.255 any
+permit ip 10.1.40.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 120
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.10.0 0.0.0.255 any
+permit ip 10.1.40.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 130
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 140
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+permit ip 10.1.10.0 0.0.0.255 any
+permit ip 10.1.20.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 150
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
+ip access-list extended 160
+permit udp any any range bootpc bootps
+permit ip 10.0.0.0 0.0.0.255 any
+deny ip any any
+exit
 interface g0/0
 no shutdown
 exit
@@ -210,6 +290,7 @@ standby preempt
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 110 out
 exit
 interface g0/0.20
 encapsulation dot1q 20
@@ -218,6 +299,7 @@ standby ip 10.1.20.254
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 120 out
 exit
 interface g0/0.30
 encapsulation dot1q 30
@@ -226,6 +308,7 @@ standby ip 10.1.30.254
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 130 out
 exit
 interface g0/0.40
 encapsulation dot1q 40
@@ -234,6 +317,7 @@ standby ip 10.1.40.254
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 140 out
 exit
 interface g0/0.50
 encapsulation dot1q 50
@@ -242,6 +326,7 @@ standby ip 10.1.50.254
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 150 out
 exit
 interface g0/0.60
 encapsulation dot1q 60
@@ -250,6 +335,7 @@ standby ip 10.1.60.254
 standby priority 120
 ip nat inside
 ip ospf cost 100
+ip access-group 160 out
 exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.129 10.1.10.251
