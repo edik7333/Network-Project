@@ -81,41 +81,46 @@ hostname RT01-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
 access-list 1 permit any
 ip access-list extended 110
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.20.0 0.0.0.255 any
-permit ip 10.1.40.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 120
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.10.0 0.0.0.255 any
-permit ip 10.1.40.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 130
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 140
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.10.0 0.0.0.255 any
-permit ip 10.1.20.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 150
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 160
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+permit ip any any
 exit
 interface g0/0
 no shutdown
@@ -250,41 +255,46 @@ hostname RT02-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
 access-list 1 permit any
 ip access-list extended 110
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.20.0 0.0.0.255 any
-permit ip 10.1.40.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 120
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.10.0 0.0.0.255 any
-permit ip 10.1.40.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 130
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 140
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-permit ip 10.1.10.0 0.0.0.255 any
-permit ip 10.1.20.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 150
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.60.0 0.0.0.255 any
+permit ip any any
 exit
 ip access-list extended 160
-permit udp any any range bootpc bootps
-permit ip 10.0.0.0 0.0.0.255 any
-deny ip any any
+deny ip 10.1.10.0 0.0.0.255 any
+deny ip 10.1.20.0 0.0.0.255 any
+deny ip 10.1.30.0 0.0.0.255 any
+deny ip 10.1.40.0 0.0.0.255 any
+deny ip 10.1.50.0 0.0.0.255 any
+permit ip any any
 exit
 interface g0/0
 no shutdown
@@ -554,41 +564,86 @@ interface g1/0/1
 no switchport
 ip address 10.2.1.2 255.255.255.0
 exit
+ip access-list extended 110
+deny ip 10.2.20.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 120
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 130
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.20.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 140
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 150
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 160
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+permit ip any any
+exit
 interface vlan 10
 ip address 10.2.10.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.10.254
+ip access-group 110 out
 exit
 interface vlan 20
 ip address 10.2.20.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.20.254
+ip access-group 120 out
 exit
 interface vlan 30
 ip address 10.2.30.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.30.254
+ip access-group 130 out
 exit
 interface vlan 40
 ip address 10.2.40.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.40.254
+ip access-group 140 out
 exit
 interface vlan 50
 ip address 10.2.50.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.50.254
+ip access-group 150 out
 exit
 interface vlan 60
 ip address 10.2.60.253 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.60.254
+ip access-group 160 out
 exit
 ip routing
 router eigrp 1
@@ -649,41 +704,86 @@ interface g1/0/1
 no switchport
 ip address 10.2.1.18 255.255.255.0
 exit
+ip access-list extended 110
+deny ip 10.2.20.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 120
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 130
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.20.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 140
+deny ip 10.2.50.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 150
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.60.0 0.0.0.255 any
+permit ip any any
+exit
+ip access-list extended 160
+deny ip 10.2.10.0 0.0.0.255 any
+deny ip 10.2.30.0 0.0.0.255 any
+deny ip 10.2.40.0 0.0.0.255 any
+deny ip 10.2.50.0 0.0.0.255 any
+permit ip any any
+exit
 interface vlan 10
 ip address 10.2.10.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.10.254
+ip access-group 110 out
 exit
 interface vlan 20
 ip address 10.2.20.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.20.254
+ip access-group 120 out
 exit
 interface vlan 30
 ip address 10.2.30.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.30.254
+ip access-group 130 out
 exit
 interface vlan 40
 ip address 10.2.40.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.40.254
+ip access-group 140 out
 exit
 interface vlan 50
 ip address 10.2.50.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.50.254
+ip access-group 150 out
 exit
 interface vlan 60
 ip address 10.2.60.252 255.255.255.0
 ip helper 10.2.11.1
 ip helper 10.2.12.1
 standby 1 ip 10.2.60.254
+ip access-group 160 out
 exit
 ip routing
 router eigrp 1
