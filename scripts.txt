@@ -79,7 +79,9 @@ enable
 conf t
 hostname RT01-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
-access-list 1 permit any
+ip access-list standard NAT-ACL
+permit any
+exit
 ip access-list extended 110
 deny ip 10.1.30.0 0.0.0.255 any
 deny ip 10.1.50.0 0.0.0.255 any
@@ -245,7 +247,7 @@ passive-interface g0/0.40
 passive-interface g0/0.50
 passive-interface g0/0.60
 exit
-ip nat inside source list 1 interface g0/0/0 overload
+ip nat inside source list NAT-ACL interface g0/0/0 overload
 
 RT02-C-HZL
 ----------
@@ -253,7 +255,9 @@ enable
 conf t
 hostname RT02-C-HZL
 banner motd #Unauthorized access to this device is prohibited!#
-access-list 1 permit any
+ip access-list standard NAT-ACL
+permit any
+exit
 ip access-list extended 110
 deny ip 10.1.30.0 0.0.0.255 any
 deny ip 10.1.50.0 0.0.0.255 any
@@ -419,7 +423,7 @@ passive-interface g0/0.40
 passive-interface g0/0.50
 passive-interface g0/0.60
 exit
-ip nat inside source list 1 interface g0/0/0 overload
+ip nat inside source list NAT-ACL interface g0/0/0 overload
 
 
 SW01-A-HZL
