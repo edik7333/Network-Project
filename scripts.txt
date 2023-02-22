@@ -274,6 +274,7 @@ passive-interface g0/0.11
 passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
+ntp server 10.1.11.2
 
 RT02-C-HZL
 ----------
@@ -470,7 +471,7 @@ passive-interface g0/0.11
 passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
-
+ntp server 10.1.12.2
 
 SW01-A-HZL
 ----------
@@ -713,6 +714,7 @@ passive-interface vlan 40
 passive-interface vlan 50
 passive-interface vlan 60
 exit
+ntp server 10.2.11.2
 
 SW02-D-TLV
 ----------
@@ -853,6 +855,7 @@ passive-interface vlan 40
 passive-interface vlan 50
 passive-interface vlan 60
 exit
+ntp server 10.2.12.2
 
 RT01-C-TLV
 ----------
@@ -903,6 +906,7 @@ router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
 redistribute eigrp 1 subnets
 exit
+ntp server 10.2.11.2
 
 RT02-C-TLV
 ----------
@@ -953,6 +957,7 @@ router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
 redistribute eigrp 1 metric 30 subnets
 exit
+ntp server 10.2.12.2
 
 SW01-A-TLV
 ----------
@@ -1006,6 +1011,7 @@ switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
+ntp server 10.2.11.2
 
 SW02-A-TLV
 ----------
@@ -1059,6 +1065,7 @@ switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
+ntp server 10.2.11.2
 
 SW03-A-TLV
 ----------
@@ -1117,6 +1124,7 @@ switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
+ntp server 10.2.11.2
 
 HFA
 ---
@@ -1156,6 +1164,7 @@ network 10.3.14.0 0.0.0.255 area 3
 network 10.3.15.0 0.0.0.255 area 3
 network 10.3.11.254 0.0.0.255 area 3
 exit
+ntp server 10.3.11.4
 
 SW02-D-HFA
 ----------
@@ -1191,6 +1200,7 @@ network 10.3.16.0 0.0.0.255 area 3
 network 10.3.17.0 0.0.0.255 area 3
 network 10.3.18.0 0.0.0.255 area 3
 exit
+ntp server 10.3.11.4
 
 RT01-C-HFA
 --------------
@@ -1237,6 +1247,7 @@ router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
 network 10.3.1.0 0.0.0.15 area 3
 exit
+ntp server 10.3.11.4
 
 RT02-C-HFA
 --------------
@@ -1283,6 +1294,7 @@ router ospf 2
 network 10.0.0.0 0.0.0.255 area 0
 network 10.3.1.16 0.0.0.15 area 3
 exit
+ntp server 10.3.11.4
 
 SW01-A-HFA
 ----------
@@ -1353,6 +1365,7 @@ network 10.3.18.0 0.0.0.255 area 3
 passive-interface vlan 50
 passive-interface vlan 60
 exit
+ntp server 10.3.11.4
 
 SW02-A-HFA
 ----------
@@ -1427,6 +1440,7 @@ network 10.3.17.0 0.0.0.255 area 3
 passive-interface vlan 20
 passive-interface vlan 40
 exit
+ntp server 10.3.11.4
 
 SW03-A-HFA
 ----------
@@ -1503,7 +1517,7 @@ network 10.3.16.0 0.0.0.255 area 3
 passive-interface vlan 10
 passive-interface vlan 30
 exit
-
+ntp server 10.3.11.4
 
 ISP
 ---
