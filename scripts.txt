@@ -9,6 +9,12 @@ hostname SW01-D-HZL
 banner motd #Unauthorized access to this device is prohibited!#
 vtp domain HZL
 vtp mode server
+vlan 11
+name DMZ-1
+exit
+vlan 12
+name DMZ-2
+exit
 vlan 10
 name dev
 exit
@@ -181,6 +187,22 @@ standby priority 140
 ip nat inside
 ip access-group 160 out
 exit
+interface g0/0.11
+encapsulation dot1q 11
+ip address 10.1.11.252 255.255.255.0
+standby ip 10.1.11.254
+standby preempt
+standby priority 140
+ip nat inside
+exit
+interface g0/0.12
+encapsulation dot1q 12
+ip address 10.1.12.252 255.255.255.0
+standby ip 10.1.12.254
+standby preempt
+standby priority 140
+ip nat inside
+exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.0 10.1.10.128
 ip dhcp excluded-address 10.1.20.252 10.1.20.254
@@ -238,6 +260,8 @@ network 10.1.30.0 0.0.0.255 area 0
 network 10.1.40.0 0.0.0.255 area 0
 network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
+network 10.1.11.0 0.0.0.255 area 0
+network 10.1.12.0 0.0.0.255 area 0
 default-information originate
 passive-interface g0/0
 passive-interface g0/0.10
@@ -246,6 +270,8 @@ passive-interface g0/0.30
 passive-interface g0/0.40
 passive-interface g0/0.50
 passive-interface g0/0.60
+passive-interface g0/0.11
+passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
 
@@ -358,6 +384,22 @@ ip nat inside
 ip ospf cost 100
 ip access-group 160 out
 exit
+interface g0/0.11
+encapsulation dot1q 11
+ip address 10.1.11.253 255.255.255.0
+standby ip 10.1.11.254
+standby priority 120
+ip nat inside
+ip ospf cost 100
+exit
+interface g0/0.12
+encapsulation dot1q 12
+ip address 10.1.12.253 255.255.255.0
+standby ip 10.1.12.254
+standby priority 120
+ip nat inside
+ip ospf cost 100
+exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.129 10.1.10.251
 ip dhcp excluded-address 10.1.20.252 10.1.20.254
@@ -414,6 +456,8 @@ network 10.1.30.0 0.0.0.255 area 0
 network 10.1.40.0 0.0.0.255 area 0
 network 10.1.50.0 0.0.0.255 area 0
 network 10.1.60.0 0.0.0.255 area 0
+network 10.1.11.0 0.0.0.255 area 0
+network 10.1.12.0 0.0.0.255 area 0
 default-information originate
 passive-interface g0/0
 passive-interface g0/0.10
@@ -422,6 +466,8 @@ passive-interface g0/0.30
 passive-interface g0/0.40
 passive-interface g0/0.50
 passive-interface g0/0.60
+passive-interface g0/0.11
+passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
 
