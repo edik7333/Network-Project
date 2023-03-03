@@ -1233,6 +1233,7 @@ name aaa
 exit
 interface vlan 88
 ip address 10.2.88.2 255.255.255.0
+no shutdown
 exit
 interface range fa0/3-6
 switchport mode access
