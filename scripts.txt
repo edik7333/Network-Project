@@ -34,11 +34,16 @@ vlan 60
 name support
 exit
 spanning-tree mode rapid-pvst
-spanning-tree vlan 1,10,20,30,40,50,60 root primary
+spanning-tree vlan 1,10,20,30,40,50,60,88 root primary
 interface range g8/1,g7/1,g6/1,g9/1
 switchport mode trunk
 spanning-tree guard root
 exit
+interface vlan 88
+ip address 10.1.88.1 255.255.255.0
+no shutdown
+exit
+ip default-gateway 10.1.88.254
 interface g5/1
 switchport mode trunk
 exit
@@ -50,7 +55,11 @@ no shutdown
 interface port-channel 1
 switchport mode trunk
 exit
-
+ip ssh version 2
+username localUser secret cisco1234
+line vty 0 4
+transport input ssh
+exit
 
 SW02-D-HZL
 ----------
@@ -62,6 +71,11 @@ interface range g8/1,g7/1,g6/1,g9/1
 switchport mode trunk
 spanning-tree guard root
 exit
+interface vlan 88
+ip address 10.1.88.2 255.255.255.0
+no shutdown
+exit
+ip default-gateway 10.1.88.254
 interface g5/1
 switchport mode trunk
 exit
@@ -76,8 +90,13 @@ exit
 vtp domain HZL
 vtp mode client
 spanning-tree mode rapid-pvst
-spanning-tree vlan 1,10,20,30,40,50,60 root secondary
-
+spanning-tree vlan 1,10,20,30,40,50,60,88 root secondary
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+line vty 0 4
+transport input ssh
+exit
 
 RT01-C-HZL
 ----------
@@ -129,6 +148,10 @@ deny ip 10.1.30.0 0.0.0.255 any
 deny ip 10.1.40.0 0.0.0.255 any
 deny ip 10.1.50.0 0.0.0.255 any
 permit ip any any
+exit
+ip access-list extended 188
+permit ip 10.1.11.1 0.0.0.0 any
+deny ip any any
 exit
 interface g0/0
 no shutdown
@@ -203,6 +226,13 @@ standby preempt
 standby priority 140
 ip nat inside
 exit
+interface g0/0.88
+encapsulation dot1q 88
+ip address 10.1.88.252 255.255.255.0
+standby ip 10.1.88.254
+standby preempt
+standby priority 140
+exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.0 10.1.10.128
 ip dhcp excluded-address 10.1.20.252 10.1.20.254
@@ -275,6 +305,17 @@ passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
 ntp server 10.1.11.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.1.11.1
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 RT02-C-HZL
 ----------
@@ -326,6 +367,10 @@ deny ip 10.1.30.0 0.0.0.255 any
 deny ip 10.1.40.0 0.0.0.255 any
 deny ip 10.1.50.0 0.0.0.255 any
 permit ip any any
+exit
+ip access-list extended 188
+permit ip 10.1.11.1 0.0.0.0 any
+deny ip any any
 exit
 interface g0/0
 no shutdown
@@ -401,6 +446,12 @@ standby priority 120
 ip nat inside
 ip ospf cost 100
 exit
+interface g0/0.88
+encapsulation dot1q 88
+ip address 10.1.88.253 255.255.255.0
+standby ip 10.1.88.254
+standby priority 120
+exit
 ip dhcp excluded-address 10.1.10.252 10.1.10.254
 ip dhcp excluded-address 10.1.10.129 10.1.10.251
 ip dhcp excluded-address 10.1.20.252 10.1.20.254
@@ -472,6 +523,17 @@ passive-interface g0/0.12
 exit
 ip nat inside source list NAT-ACL interface g0/0/0 overload
 ntp server 10.1.12.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.1.11.1
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW01-A-HZL
 ----------
@@ -504,6 +566,22 @@ switchport port-security
 switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation shutdown
+exit
+interface vlan 88
+ip address 10.1.88.3 255.255.255.0
+no shutdown
+exit
+ip default-gateway 10.1.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.1.11.1
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
 exit
 
 SW02-A-HZL
@@ -538,6 +616,22 @@ switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
+interface vlan 88
+ip address 10.1.88.4 255.255.255.0
+no shutdown
+exit
+ip default-gateway 10.1.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.1.11.1
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW03-A-HZL
 ----------
@@ -570,6 +664,22 @@ switchport port-security
 switchport port-security maximum 1
 switchport port-security mac-address sticky
 switchport port-security violation protect
+exit
+interface vlan 88
+ip address 10.1.88.5 255.255.255.0
+no shutdown
+exit
+ip default-gateway 10.1.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.1.11.1
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
 exit
 
 TLV
@@ -605,6 +715,9 @@ name HR
 exit
 vlan 60
 name accounting
+exit
+vlan 88
+name aaa
 exit
 spanning-tree mode rapid-pvst
 spanning-tree vlan 1,10,20,30,40,50,60 root primary
@@ -696,6 +809,12 @@ ip helper 10.2.12.1
 standby 1 ip 10.2.60.254
 ip access-group 160 out
 exit
+interface vlan 88
+ip address 10.2.88.253 255.255.255.0
+standby 1 ip 10.2.88.254
+standby 1 priority 110
+standby 1 preempt
+exit
 ip routing
 router eigrp 1
 network 10.2.10.0 0.0.0.255
@@ -715,6 +834,17 @@ passive-interface vlan 50
 passive-interface vlan 60
 exit
 ntp server 10.2.11.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW02-D-TLV
 ----------
@@ -746,6 +876,9 @@ name HR
 exit
 vlan 60
 name accounting
+exit
+vlan 88
+name aaa
 exit
 spanning-tree mode rapid-pvst
 spanning-tree vlan 1,10,20,30,40,50,60 root secondary
@@ -837,6 +970,10 @@ ip helper 10.2.12.1
 standby 1 ip 10.2.60.254
 ip access-group 160 out
 exit
+interface vlan 88
+ip address 10.2.88.252 255.255.255.0
+standby 1 ip 10.2.88.254
+exit
 ip routing
 router eigrp 1
 network 10.2.10.0 0.0.0.255
@@ -856,6 +993,17 @@ passive-interface vlan 50
 passive-interface vlan 60
 exit
 ntp server 10.2.12.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.12.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 RT01-C-TLV
 ----------
@@ -907,6 +1055,17 @@ network 10.0.0.0 0.0.0.255 area 0
 redistribute eigrp 1 subnets
 exit
 ntp server 10.2.11.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 RT02-C-TLV
 ----------
@@ -958,6 +1117,17 @@ network 10.0.0.0 0.0.0.255 area 0
 redistribute eigrp 1 metric 30 subnets
 exit
 ntp server 10.2.12.2
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW01-A-TLV
 ----------
@@ -986,6 +1156,12 @@ exit
 vlan 60
 name accounting
 exit
+vlan 88
+name aaa
+exit
+interface vlan 88
+ip address 10.2.88.1 255.255.255.0
+exit
 interface range fa0/3-4
 switchport mode access
 switchport access vlan 20
@@ -1012,6 +1188,18 @@ switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
 ntp server 10.2.11.2
+ip default-gateway 10.2.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW02-A-TLV
 ----------
@@ -1040,6 +1228,12 @@ exit
 vlan 60
 name accounting
 exit
+vlan 88
+name aaa
+exit
+interface vlan 88
+ip address 10.2.88.2 255.255.255.0
+exit
 interface range fa0/3-6
 switchport mode access
 switchport access vlan 30
@@ -1066,6 +1260,18 @@ switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
 ntp server 10.2.11.2
+ip default-gateway 10.2.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW03-A-TLV
 ----------
@@ -1093,6 +1299,12 @@ name HR
 exit
 vlan 60
 name accounting
+exit
+vlan 88
+name aaa
+exit
+interface vlan 88
+ip address 10.2.88.3 255.255.255.0
 exit
 interface range fa0/3-4
 switchport mode access
@@ -1125,6 +1337,18 @@ switchport port-security mac-address sticky
 switchport port-security violation restrict
 exit
 ntp server 10.2.11.2
+ip default-gateway 10.2.88.254
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.2.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 HFA
 ---
@@ -1165,6 +1389,17 @@ network 10.3.15.0 0.0.0.255 area 3
 network 10.3.11.254 0.0.0.255 area 3
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW02-D-HFA
 ----------
@@ -1201,6 +1436,20 @@ network 10.3.17.0 0.0.0.255 area 3
 network 10.3.18.0 0.0.0.255 area 3
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
+
 
 RT01-C-HFA
 --------------
@@ -1248,6 +1497,19 @@ network 10.0.0.0 0.0.0.255 area 0
 network 10.3.1.0 0.0.0.15 area 3
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 RT02-C-HFA
 --------------
@@ -1295,6 +1557,19 @@ network 10.0.0.0 0.0.0.255 area 0
 network 10.3.1.16 0.0.0.15 area 3
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW01-A-HFA
 ----------
@@ -1366,6 +1641,19 @@ passive-interface vlan 50
 passive-interface vlan 60
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW02-A-HFA
 ----------
@@ -1441,6 +1729,19 @@ passive-interface vlan 20
 passive-interface vlan 40
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 SW03-A-HFA
 ----------
@@ -1518,6 +1819,19 @@ passive-interface vlan 10
 passive-interface vlan 30
 exit
 ntp server 10.3.11.4
+ip domain-name cisco.com
+ip ssh version 2
+crypto key generate rsa 
+1024
+username localUser secret cisco1234
+tacacs-server host 10.3.11.253
+tacacs-server key cisco
+aaa new-model
+aaa authentication login default group tacacs+ local
+line vty 0 4
+transport input ssh
+login authentication default
+exit
 
 ISP
 ---
